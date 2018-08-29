@@ -37,6 +37,7 @@ button {
     border-radius: 4px;
 }
 
+
 course-card.is-first {
     border-top: 2px solid grey;
     padding-top: 20px;
@@ -55,8 +56,6 @@ course-card.is-even {
 course-card.is-odd {
     background: lightcyan;
 }
-
-
 
 .course-category {
     margin-top: 15px;
@@ -86,11 +85,3 @@ course-card.is-odd {
 .highlighted {
   box-shadow: 0 2px 16px 0 #de1e19, 0 3px 8px 0 rgba(226, 21, 19, 0.47), 0 6px 8px -1px #b41c18;
 }
-
-
-
-
-
-
-
-
