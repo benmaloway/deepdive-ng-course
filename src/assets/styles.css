@@ -78,6 +78,12 @@ course-card.is-odd {
     font-size: 25px;
 }
 
+.format-demo {
+    max-width: 300px;
+    margin: 20px auto;
+    font-size: 25px;
+}
+
 .warn {
   color:red;
 }
