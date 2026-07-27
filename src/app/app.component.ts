@@ -5,7 +5,7 @@ import {COURSES} from '../db-data';
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.Default,
     standalone: false
 })
 export class AppComponent {
