@@ -20,7 +20,7 @@ import {CourseImageComponent} from '../course-image/course-image.component';
     selector: 'course-card',
     templateUrl: './course-card.component.html',
     styleUrls: ['./course-card.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.Default,
     standalone: false
 })
 export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentInit {
