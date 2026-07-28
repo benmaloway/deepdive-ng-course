@@ -1,14 +1,39 @@
-<div class="course-card" *ngIf="course">
+<!-- <div class="course-card" *ngIf="course" [ngClass]="['beginner','another-class']"> -->
+<!-- <div class="" *ngIf="course" [ngClass]="{ 'beginner': false, 'course-card': true }"> -->
+<div class="course-card" *ngIf="course" [ngClass]="cardClasses()">
 
-    <div class="course-title">
-        {{ course.description }}
-    </div>
+  <!-- <div class="course-title" [style.text-decoration]="course.id == 1 ? 'underline' : 'none'">
+    {{ index }}. {{ course.description }}
+  </div> -->
+
+  <div class="course-title" [ngStyle]="cardStyles()">
+    {{ index }}. {{ course.description }}
+  </div>
+
+  @if (course.id == 1) {
+    <h2>Course 1 rendered</h2>
+  }
+
+  @else if (course.iconUrl) {
     <img width="300" alt="Angular Logo" [src]="course.iconUrl">
+  }
 
-    <div class="course-description">
-        {{ course.longDescription }}
-    </div>
+  @else {
+    <h2>No image for this course</h2>
+  }
 
-    <button (click)="onCourseViewed()">View Course</button>
+  <!-- Old ngIf syntax example: -->
+
+  <!-- <img width="300" alt="Angular Logo" *ngIf="course.iconUrl; else noImage" [src]="course.iconUrl">
+
+  <ng-template #noImage >
+    <p>No image for this course</p>
+  </ng-template> -->
+
+  <div class="course-description">
+    {{ course.longDescription }}
+  </div>
+
+  <button (click)="onCourseViewed()">View Course</button>
 
 </div>
