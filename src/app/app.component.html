@@ -1,68 +1,25 @@
-<div class="top-menu">
-  <img class="logo"src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
-</div>
+<div class="top-menu"><img class="logo"src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png"></div>
 
-<!-- {{ courses | json}} -->
+<button (click)="onCoursesEdited()">Add Course</button>
 
-<!-- @for (course of courses | slice:0:5;) {
-
-}
- -->
-
-<!-- <div *ngFor="let pair of courses | keyvalue">
-
-  {{ pair.key }}: {{ pair.value }}
-</div> -->
-
-<div class="demo">
-  <div>Start Date: {{ startDate | date: 'MMM/dd/yyyy' }}</div>
-  <div>Title: {{ title | uppercase }}</div>
-  <div>Number: {{ number | number:'3.3-5' }}</div>
-  <div>Currency:{{ number | currency:'USD':'symbol' }}</div>
-</div>
-
-<div class="courses" #container>
-
-  @for (course of courses | slice:0:5; track course.id;) {
-    
-    <course-card 
-      [course]="course" 
-      [index]="$index" 
-      (courseSelected)="onCourseSelected($event)" />
-  }
-
-  @empty {
-    <div class="no-courses">
-      No courses found!
-    </div>
-  }
-
-  <!-- Earlier for syntax: -->
-
-  <!-- <course-card
-    *ngFor="let course of courses; index as i; first as isFirst; last as isLast; even as isEven; odd as isOdd; trackBy: trackCourse"
-    [class.is-first]="isFirst"
-    [class.is-last]="isLast"
-    [class.is-even]="isEven"
-    [class.is-odd]="isOdd"
-    [course]="course" 
-    [cardIndex]="i + 1"
-    (courseSelected)="onCourseSelected($event)"></course-card> -->
-
-  <h2>How to get a reference to the course-card component instance from the child component? you can query a specific card using a refernce like #cardRef</h2>
+<div class="courses" *ngIf="courses[0] as course">
 
   <course-card 
     (courseSelected)="onCourseSelected($event)"
-    [course]="courses[0]" [index]="">
-    </course-card>
+    [course]="course">
+    <!-- All from here will be projected into the course-card component using ng-content in the target template -->
+    <img width="300" alt="Angular Logo" [src]="course.iconUrl">
+    <h1>I will also be projected</h1>
+    <!-- This is projected content from the parent component. It will be displayed in the course-card component using ng-content select attribute. -->
+    <img #courseImage width="300" alt="Angular Logo" [src]="course.iconUrl">
 
-  <course-card #cardRef2
-    (courseSelected)="onCourseSelected($event)"
-    [course]="courses[1]" [index]="">
-    </course-card>
-    
-  <course-card #cardRef3
-    (courseSelected)="onCourseSelected($event)"
-    [course]="courses[1]" [index]="">
-    </course-card>
+    <div class="course-image" #courseImageDiv style="outline: 3px solid red;">
+      <img width="300" alt="Angular Logo" [src]="course.iconUrl">
+      <h3>something else</h3>
+    </div>
+
+    <h4>Extra Projected content from the parent componentß</h4>
+
+  </course-card>
+
 </div>

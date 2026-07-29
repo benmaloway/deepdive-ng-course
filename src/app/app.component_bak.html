@@ -1,0 +1,69 @@
+<div class="top-menu"><img class="logo"src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png"></div>
+
+<button (click)="onCoursesEdited()">Add Course</button>
+
+<!-- {{ courses | json}} -->
+
+<!-- @for (course of courses | slice:0:5;) {
+
+}
+ -->
+
+<!-- <div *ngFor="let pair of courses | keyvalue">
+
+  {{ pair.key }}: {{ pair.value }}
+</div> -->
+
+<div class="demo">
+  <div>Start Date: {{ startDate | date: 'MMM/dd/yyyy' }}</div>
+  <div>Title: {{ title | uppercase }}</div>
+  <div>Number: {{ number | number:'3.3-5' }}</div>
+  <div>Currency:{{ number | currency:'USD':'symbol' }}</div>
+</div>
+
+<div class="courses" #container>
+
+  <!-- IMPORTANT: If you want to detect mutations to a QueryList, and the list is truncated with a slice pipe, you need to use the @for syntax instead of *ngFor. The reason is that the slice pipe returns a new array each time it is called, so Angular cannot detect changes to the original array.  It will keep the changes.subscribe from firing. -->
+  <!-- @for (course of courses | slice:0:5; track course.id;) { -->
+  @for (course of courses; track course.id;) {
+    <course-card 
+      [course]="course" 
+      [index]="$index" 
+      (courseSelected)="onCourseSelected($event)" />
+  }
+
+  @empty {
+    <div class="no-courses">
+      No courses found!
+    </div>
+  }
+
+  <!-- Earlier for syntax: -->
+
+  <!-- <course-card
+    *ngFor="let course of courses; index as i; first as isFirst; last as isLast; even as isEven; odd as isOdd; trackBy: trackCourse"
+    [class.is-first]="isFirst"
+    [class.is-last]="isLast"
+    [class.is-even]="isEven"
+    [class.is-odd]="isOdd"
+    [course]="course" 
+    [cardIndex]="i + 1"
+    (courseSelected)="onCourseSelected($event)"></course-card> -->
+
+  <h2>How to get a reference to the course-card component instance from the child component? you can query a specific card using a refernce like #cardRef</h2>
+
+  <course-card 
+    (courseSelected)="onCourseSelected($event)"
+    [course]="courses[0]" [index]="">
+    </course-card>
+
+  <course-card #cardRef2
+    (courseSelected)="onCourseSelected($event)"
+    [course]="courses[1]" [index]="">
+    </course-card>
+    
+  <course-card #cardRef3
+    (courseSelected)="onCourseSelected($event)"
+    [course]="courses[1]" [index]="">
+    </course-card>
+</div>

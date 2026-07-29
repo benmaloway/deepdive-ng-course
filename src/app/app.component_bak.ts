@@ -44,8 +44,15 @@ export class AppComponent implements AfterViewInit {
   containerDiv: ElementRef;
 
   // This returns a QueryList of all the CourseCardComponent instances in the view and assigns it to the cards property. You can use this to get all the child components of a specific type in the view.
+  /* @ViewChildren(CourseCardComponent)
+  cards; */
+
+  // This returns a QueryList of all the CourseCardComponent instances in the view and assigns it to the cards property. You can use this to get all the child components of a specific type in the view.
   @ViewChildren(CourseCardComponent)
-  cards: QueryList<CourseCardComponent>;
+  cards : QueryList<CourseCardComponent>;
+  // If you want to read dom elements in the returned QueryList, you can use the read option to specify the type of the elements you want to read. In this case, we are reading the ElementRef of the CourseCardComponent instances in the view.
+  // @ViewChildren(CourseCardComponent, { read: ElementRef })
+  // cards : QueryList<ElementRef>;
 
   constructor() {
   }

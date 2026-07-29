@@ -1,73 +1,28 @@
-<!-- To avoid rendering empty dom elements for empty strings or null values use ng-container -->
-<ng-container *ngIf="course">
+  <div class="course-card" *ngIf="course" #container>
 
-  <!-- <div class="course-card" *ngIf="course" [ngClass]="['beginner','another-class']"> -->
-  <!-- <div class="" *ngIf="course" [ngClass]="{ 'beginner': false, 'course-card': true }"> -->
-  <div class="course-card" *ngIf="course" [ngClass]="cardClasses()">
-
-    <!-- <div class="course-title" [style.text-decoration]="course.id == 1 ? 'underline' : 'none'">
-      {{ index }}. {{ course.description }}
-    </div> -->
-
-    <div class="course-title" [ngStyle]="cardStyles()">
-      {{ index }}. {{ course.description }}
+    <div class="course-title">
+      {{ cardIndex || '' + ' '}}  {{ course.description }}
     </div>
-
-    @if (course.id == 1) {
-      <h2>Course 1 rendered</h2>
-    }
-
-    @else if (course.iconUrl) {
-      <img width="300" alt="Angular Logo" [src]="course.iconUrl" #courseImage>
-    }
-
-    @else {
-      <h2>No image for this course</h2>
-    }
-
-    <!-- Old ngIf syntax example: -->
-
-    <!-- <img width="300" alt="Angular Logo" *ngIf="course.iconUrl; else noImage" [src]="course.iconUrl">
-
-    <ng-template #noImage >
-      <p>No image for this course</p>
-    </ng-template> -->
+    <!-- Example of content projection using ng-content. The select attribute allows you to specify which elements to project into the component. In this case, it will project any element with the attribute courseImage into the component. -->
+    <ng-content></ng-content>
+    <!-- To target a particular element in the projected content, you can use the select attribute on the ng-content element. For example, if you want to project only elements with the attribute courseImage, you can use <ng-content select="[courseImage]"></ng-content>. This will only project elements that have the courseImage attribute into the component. -->
+    <ng-content select="[courseImage]"></ng-content>
+    <!-- Target a parent div of the img -->
+    <ng-content select=".course-image"></ng-content>
+    <!-- Anything else in parent component not specifically projected into child component -->
+    <ng-content></ng-content>
 
     <div class="course-description">
       {{ course.longDescription }}
     </div>
 
-    <div class="course-category">
-
-      @switch (course.category) {
-        @case ('BEGINNER') {
-          <div class="category">Beginner</div>
-        }
-        @case ('INTERMEDIATE') {
-          <div class="category">Intermediate</div>
-        }
-        @case ('ADVANCED') {
-          <div class="category">Advanced</div>
-        }
-        @default {
-          <div class="category">All Levels</div>
-        }
-      }
-
-    </div>
-
-    <!-- To avoid rendering empty dom elements for empty strings or null values use ng-container -->
-    <ng-container [ngSwitch]="course.category">
-     
-    <!-- Older syntax example (used with [ngSwitch]): -->
-    <!-- <div class="course-category" [ngSwitch]="course.category">
+    <div class="course-category" [ngSwitch]="course.category">
       <div class="category" *ngSwitchCase="'BEGINNER'" >Beginner</div>
       <div class="category" *ngSwitchCase="'INTERMEDIATE'" >Intermediate</div>
       <div class="category" *ngSwitchCase="'ADVANCED'" >Advanced</div>
       <div class="category" *ngSwitchDefault>All Levels</div>
-    </div> -->
-    </ng-container>
+    </div>
+    
     <button (click)="onCourseViewed()">View Course</button>
 
   </div>
-</ng-container>

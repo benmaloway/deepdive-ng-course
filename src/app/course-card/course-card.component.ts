@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ContentChild, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Course } from '../model/course';
 
 @Component({
@@ -20,9 +20,18 @@ export class CourseCardComponent {
   @Output()
   courseSelected = new EventEmitter<Course>();
 
+  //To get the contents of projected content, you cannot use ViewChild
+  @ContentChild('courseImageDiv')
+  image: ElementRef;
+
   onCourseViewed() {
-  console.log("Course viewed: " + this.course.description);
-  this.courseSelected.emit(this.course);
+    //console.log("Course viewed: " + this.course.description);
+    this.courseSelected.emit(this.course);
+  }
+
+  ngAfterViewInit() {
+    console.log("CourseCardComponent view initialized");
+    console.log("Image element: ", this.image);
   }
 
   cardClasses() {
