@@ -7,18 +7,12 @@
   <course-card 
     (courseSelected)="onCourseSelected($event)"
     [course]="course">
-    <!-- All from here will be projected into the course-card component using ng-content in the target template -->
-    <img width="300" alt="Angular Logo" [src]="course.iconUrl">
-    <h1>I will also be projected</h1>
-    <!-- This is projected content from the parent component. It will be displayed in the course-card component using ng-content select attribute. -->
-    <img #courseImage width="300" alt="Angular Logo" [src]="course.iconUrl">
 
-    <div class="course-image" #courseImageDiv style="outline: 3px solid red;">
-      <img width="300" alt="Angular Logo" [src]="course.iconUrl">
-      <h3>something else</h3>
+    <course-image [src]="course.iconUrl"></course-image>
+
+    <div class="course-description">
+      {{ course.longDescription }}
     </div>
-
-    <h4>Extra Projected content from the parent componentß</h4>
 
   </course-card>
 
