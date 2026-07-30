@@ -16,12 +16,6 @@
     "**/*.d.ts"
   ],
   "angularCompilerOptions": {
-    "strictTemplates": false,
-    "extendedDiagnostics": {
-      "checks": {
-        "nullishCoalescingNotNullable": "suppress",
-        "optionalChainNotNullable": "suppress"
-      }
-    }
+    "strictTemplates": false
   }
 }
