@@ -4,8 +4,11 @@
       {{ cardIndex || '' + ' '}}  {{ course.description }}
     </div>
 
-    <!-- Target the course-image component rather than the class .course-image -->
-    <ng-content select="course-image"></ng-content>
+    <ng-content select="course-image" *ngIf="course.iconUrl; else noImage"></ng-content>
+
+    <ng-template #noImage>
+      <ng-container *ngTemplateOutlet="noImgTpl; context: { description: course.description }"></ng-container>
+    </ng-template>
 
     <ng-content select=".course-description"></ng-content>
 

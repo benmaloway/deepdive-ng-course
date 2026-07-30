@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChild, ContentChildren, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ContentChild, ContentChildren, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, TemplateRef, ViewChild } from '@angular/core';
 import { Course } from '../model/course';
 import { CourseImageComponent } from '../course-image/course-image.component';
 
@@ -11,8 +11,13 @@ import { CourseImageComponent } from '../course-image/course-image.component';
 export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   @Input({ required: true })
-  index: number;
+  course: Course;
 
+  @Input()
+  noImgTpl: TemplateRef<any>;
+
+  @Input({ required: true })
+  index: number;
 
   @Input()
   cardIndex: number;
@@ -38,9 +43,6 @@ export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentI
     console.log("CourseCardComponent content initialized", this.images);
 
   }
-
-  @Input({ required: true })
-  course: Course;
 
   constructor() { }
 
