@@ -1,0 +1,31 @@
+<!-- the highlighted directive can be used on any component -->
+<div highlighted class="top-menu">
+
+  <img class="logo"
+    src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
+  </div>
+
+  @if (courses[0]; as course) {
+    <div class="courses">
+      <!-- The course-card component is a 'host' element to the highlighted directive. -->
+      <!-- <course-card highlighted (courseSelected)="onCourseSelected($event)"
+        [course]="course"> -->
+        <!-- Here using specifying an input property used by directive -->
+      <!-- onToggle is implemented in app.component while toggleHighlight in highlight.directive. onToggle receives the event emission from toggleHighlight --> 
+       <!-- #highlighter reference to 'hl' notation to use exported highlighted directive -->
+        <course-card highlighted 
+        (toggleHighlight)="onToggle($event)"
+        #highlighter="hl"
+        (courseSelected)="onCourseSelected($event)"
+        [course]="course">
+      <course-image [src]="course.iconUrl"></course-image>
+      <!-- highlighter.toggle is referencing #highlighter marked items -->
+      <div class="course-description" 
+        (dblclick)="highlighter.toggle()">
+        {{ course.longDescription }}
+      </div>
+    </course-card>
+  </div>
+}
+
+
