@@ -1,6 +1,69 @@
+/* This accesses the style of the component itself from within itself, in this case the course-card element
+In other words the course-card element selector will not be recognized from within itself */
+:host {
+  display: block;
+}
+
+:host.is-first {
+  display: block;
+}
+
+:host.is-first {
+  border-top: 2px solid grey;
+  padding-top: 20px;
+}
+
+:host.is-last {
+  border-bottom: 2px solid grey;
+  padding-top: 20px;
+}
+
+:host.is-even {
+  background: lightgray;
+}
+
+:host.is-odd {
+  background: lightcyan;
+}
+/* Allow macro level access to hierarchy again with ng-deep.  However this is same as directly putting style into global css. */
+/* ::ng-deep .salmon-theme .course-card{
+  background: lightsalmon;
+} */
+/* Instead of such general fix, get more specific using :host-context.  The .salmon-theme is made generic to the page but the child element still retains its context. */
+:host-context(.salmon-theme) .course-card{
+  background: lightsalmon;
+}
+
+.course-card {
+  margin-bottom: 40px;
+  text-align: center;
+  border-radius: 4px;
+  padding: 20px 0;
+  box-shadow: 0 1px 16px 0 rgba(0, 0, 0, .2), 0 2px 8px 0 rgba(0, 0, 0, .14), 0 4px 8px -1px rgba(0, 0, 0, .12);
+}
 
 .course-card.beginner {
     background: lightsalmon;
 }
+
+/* Use ::ng-deep to correctly target the selectors regardless of how they're instantiated, encapsulated and projected in Angular. */
+.course-card .course-title {
+  font-size: 27px;
+  font-weight: bold;
+}
+
+.course-card ::ng-deep .course-description {
+  max-width: 360px;
+  margin: 0 auto;
+  margin-top: 15px;
+  user-select: none;
+  border: 1px solid red;
+}
+
+.course-card img {
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
 
 

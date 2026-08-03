@@ -1,9 +1,10 @@
 <div class="top-menu">
   <img class="logo" src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
 </div>
+
 <!-- Normally *ngIf syntax used when directly placed in HTML. Because ng-template is talking directly with Angular it doesn't need interpolation so use brackets.  -->
 <ng-template [ngIf]="courses[0]" let-course>
-  <div class="courses">
+  <div class="courses salmon-theme">
     <course-card highlighted 
       (toggleHighlight)="onToggle($event)"
       #highlighter="hl"
