@@ -27,6 +27,7 @@ import {CourseImageComponent} from '../course-image/course-image.component';
 // The shadowDom encapsulation mode uses the browser's native shadow DOM implementation to encapsulate styles. This means that styles defined in a component will not affect any other components, and styles defined outside of the component will not affect the component. This is the most secure form of encapsulation, but it may not be supported in all browsers.
 
 // Do not use ViewEncapsulation.Native as it is deprecated and will be removed in future versions of Angular.  Use ViewEncapsulation.ShadowDom instead.
+
 @Component({
     selector: 'course-card',
     templateUrl: './course-card.component.html',

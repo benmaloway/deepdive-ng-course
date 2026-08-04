@@ -12,13 +12,13 @@ import { NgxUnlessDirective } from './directives/ngx-unless.directive';
   declarations: [
     AppComponent,
     CourseCardComponent,
-    CourseImageComponent,
-    HighlightedDirective,
-    NgxUnlessDirective
+    CourseImageComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HighlightedDirective,
+    NgxUnlessDirective
   ],
   providers: [],
   bootstrap: [AppComponent]
