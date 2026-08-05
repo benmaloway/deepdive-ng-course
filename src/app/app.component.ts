@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, QueryList, ViewChild, ViewChildren, ChangeDetectionStrategy} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, QueryList, ViewChild, ViewChildren, ChangeDetectionStrategy, OnInit} from '@angular/core';
 import {COURSES} from '../db-data';
 import {Course} from './model/course';
 import {CourseCardComponent} from './course-card/course-card.component';
@@ -14,37 +14,33 @@ import { NgxUnlessDirective } from './directives/ngx-unless.directive';
 })
 export class AppComponent implements OnInit {
 
-    // @ViewChild(HighlightedDirective)
-    // highlighted: HighlightedDirective;
-
-    //If multiple items are using the highlighteddirective then query a specific component.
-    @ViewChild(CourseCardComponent, {read: HighlightedDirective})
-    highlighted: HighlightedDirective;
-
-  courses = COURSES;
-
   constructor() {
 
   }
 
+  // @ViewChild(HighlightedDirective)
+  // highlighted: HighlightedDirective;
+
+  //If multiple items are using the highlighteddirective then query a specific component.
+  @ViewChild(CourseCardComponent, {read: HighlightedDirective})
+  highlighted: HighlightedDirective;
+
+  courses = COURSES;
+
   ngOnInit() {
   }
 
-    constructor() {
+  onToggle(isHighlighted: boolean) {
+    console.log("isHighlighted = ", isHighlighted);
+  }
 
-    }
+  ngAfterViewInit() {
+    console.log(this.highlighted)
 
-    onToggle(isHighlighted: boolean) {
-      console.log("isHighlighted = ", isHighlighted);
-    }
+  }
 
-    ngAfterViewInit() {
-      console.log(this.highlighted)
+  onCourseSelected(course:Course) {
 
-    }
-
-    onCourseSelected(course:Course) {
-
-    }
+  }
 
 }

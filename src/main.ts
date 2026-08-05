@@ -8,5 +8,7 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule, { applicationProviders: [provideZoneChangeDetection()], })
+platformBrowserDynamic().bootstrapModule(AppModule, {
+  providers: [provideZoneChangeDetection() as any],
+})
   .catch(err => console.log(err));
