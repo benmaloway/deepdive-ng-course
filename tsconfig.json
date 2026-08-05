@@ -15,6 +15,7 @@
     ],
     "useDefineForClassFields": false,
     "ignoreDeprecations": "6.0",
+    "skipLibCheck": true,
     "strictPropertyInitialization": false,
     "strictNullChecks": false,
     "noImplicitAny": false

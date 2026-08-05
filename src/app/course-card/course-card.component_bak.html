@@ -1,0 +1,49 @@
+<div class="course-card" *ngIf="course" [ngClass]="cardClasses()">
+
+  <div class="course-title" [ngStyle]="cardStyles()">
+    {{ cardIndex || ''}}  {{ course.description }}
+  </div>
+
+  <img width="300" alt="Angular Logo" *ngIf="course.iconUrl; else noImage" [src]="course.iconUrl">
+
+  <ng-template #noImage >
+    <p>No image for this course</p>
+  </ng-template>
+
+  <div class="course-description">
+    {{ course.longDescription }}
+  </div>
+
+  <div class="course-category">
+
+    @switch (course.category) {
+      @case ('BEGINNER') {
+        <div class="category">Beginner</div>
+      }
+      @case ('INTERMEDIATE') {
+        <div class="category">Intermediate</div>
+      }
+      @case ('ADVANCED') {
+        <div class="category">Advanced</div>
+      }
+      @default {
+        <div class="category">All Levels</div>
+      }
+    }
+
+  </div>
+
+  <!-- To avoid rendering empty dom elements for empty strings or null values use ng-container -->
+  <!-- <ng-container [ngSwitch]="course.category"> -->
+    
+  <!-- Older syntax example (used with [ngSwitch]): -->
+  <!-- <div class="course-category" [ngSwitch]="course.category">
+    <div class="category" *ngSwitchCase="'BEGINNER'" >Beginner</div>
+    <div class="category" *ngSwitchCase="'INTERMEDIATE'" >Intermediate</div>
+    <div class="category" *ngSwitchCase="'ADVANCED'" >Advanced</div>
+    <div class="category" *ngSwitchDefault>All Levels</div>
+  </div> -->
+  <!-- </ng-container> -->
+  <button (click)="onCourseViewed()">View Course</button>
+
+</div>

@@ -4,7 +4,7 @@ import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
     selector: 'course-image',
     templateUrl: './course-image.component.html',
     styleUrls: ['./course-image.component.css'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.Default,
     standalone: false
 })
 export class CourseImageComponent implements OnInit {

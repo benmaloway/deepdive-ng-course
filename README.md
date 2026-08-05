@@ -17,6 +17,21 @@ With the following command the angular-cli will be installed globally in your ma
 
     npm install -g @angular/cli
 
+Note: different branches/sections of this repo pin different Angular versions (this checkout uses Angular 22). Since `@angular/cli` is also listed as a local devDependency, you can skip the global install and instead run the CLI with `npx` so it always matches whichever branch you have checked out:
+
+    npx ng serve
+    npx ng generate component foo
+    npx ng version
+
+`npx` resolves the binary from this project's `node_modules/.bin` first, so it uses the exact CLI version installed for the current branch rather than whatever (if anything) is installed globally.
+
+# Node version auto-switching (.nvmrc)
+
+This checkout includes a `.nvmrc` file pinning Node to the version required by this branch's Angular version. If you use [nvm](https://github.com/nvm-sh/nvm), running the following inside the project directory switches you to the right Node version automatically:
+
+    nvm use
+
+If you'd like this to happen automatically whenever you `cd` into the project, enable nvm's shell auto-use hook (see the nvm README's "Deeper Shell Integration" section) so it reads `.nvmrc` on directory change without needing to run `nvm use` manually.
 
 # How To install this repository
 

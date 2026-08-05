@@ -1,3 +1,4 @@
+
 @if (course) {
   <div class="course-card" #container>
     <div class="course-title">
@@ -6,10 +7,12 @@
     @if (course.iconUrl) {
       <ng-content select="course-image"
       ></ng-content>
+    } @else {
+      <ng-container
+        *ngTemplateOutlet="noImageTpl;context: {description:course.description}">
+      </ng-container>
     }
-    <div class="course-description">
-      Edit Title: <input #courseTitle [value]="course.description">
-    </div>
+    <ng-content select=".course-description"></ng-content>
     <div class="course-category">
       @switch (course.category) {
         @case ('BEGINNER') {
@@ -23,7 +26,10 @@
         }
       }
     </div>
-    <button (click)="onSaveClicked(courseTitle.value)">Save Course</button>
+    <button (click)="onCourseViewed()">View Course</button>
+    <ng-template #noImageTpl let-description="description">
+      <div class="no-image">{{ description }}</div>
+    </ng-template>
   </div>
 }
 

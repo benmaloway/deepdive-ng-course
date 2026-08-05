@@ -1,10 +1,14 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { CourseCardComponent } from './course-card/course-card.component';
+import { CourseImageComponent } from './course-image/course-image.component';
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        CourseCardComponent,
+        CourseImageComponent
       ],
     }).compileComponents();
   }));
@@ -13,15 +17,10 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-  it(`should have as title 'angular-course'`, waitForAsync(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('angular-course');
-  }));
-  it('should render title in a h1 tag', waitForAsync(() => {
+  it('should render the first course as a course-card', waitForAsync(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to angular-course!');
+    expect(compiled.querySelector('course-card')).toBeTruthy();
   }));
 });

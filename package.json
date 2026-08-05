@@ -2,12 +2,12 @@
   "name": "angular-course",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve --proxy-config ./proxy.json",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
+    "ng": "npx ng",
+    "start": "npx ng serve --proxy-config ./proxy.json",
+    "build": "npx ng build",
+    "test": "npx ng test",
+    "lint": "npx ng lint",
+    "e2e": "npx ng e2e",
     "server": "tsx --tsconfig ./server.tsconfig.json ./server.ts"
   },
   "private": true,

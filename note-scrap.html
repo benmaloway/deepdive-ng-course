@@ -1,0 +1,11 @@
+  @for (course of courses; track course.id; let index = $index; let count = $count;let last = $last; let even = $even; let odd = $odd) {
+    
+    <course-card 
+      [course]="course" 
+      [index]="index" 
+      [class.is-first]="$first"
+      [class.is-last]="last"
+      [class.is-even]="even"
+      [class.is-odd]="odd"
+      (courseSelected)="onCourseSelected($event)" />
+  }
