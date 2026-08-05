@@ -14,33 +14,12 @@ import { NgxUnlessDirective } from './directives/ngx-unless.directive';
 })
 export class AppComponent implements OnInit {
 
+  courses = COURSES;
+
   constructor() {
 
   }
 
-  // @ViewChild(HighlightedDirective)
-  // highlighted: HighlightedDirective;
-
-  //If multiple items are using the highlighteddirective then query a specific component.
-  @ViewChild(CourseCardComponent, {read: HighlightedDirective})
-  highlighted: HighlightedDirective;
-
-  courses = COURSES;
-
   ngOnInit() {
   }
-
-  onToggle(isHighlighted: boolean) {
-    console.log("isHighlighted = ", isHighlighted);
-  }
-
-  ngAfterViewInit() {
-    console.log(this.highlighted)
-
-  }
-
-  onCourseSelected(course:Course) {
-
-  }
-
 }

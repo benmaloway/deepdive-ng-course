@@ -107,7 +107,6 @@ In other words the course-card element selector will not be recognized from with
   margin: 0 auto;
   margin-top: 15px;
   user-select: none;
-  border: 1px solid red;
 }
 
 .course-card img {
