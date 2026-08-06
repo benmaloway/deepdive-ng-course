@@ -41,8 +41,7 @@ export class CourseCardComponent implements OnInit {
 
     ngOnInit() {
 
-      console.log("coursesServices course card " + this.coursesServices.id);
-
+      
     }
 
 

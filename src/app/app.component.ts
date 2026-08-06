@@ -1,17 +1,19 @@
 import { CoursesService } from './services/courses.service';
-import {Component, ChangeDetectionStrategy, OnInit} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import { Observable } from 'rxjs';
 import {Course} from './model/course';
+import { APP_CONFIG, AppConfig, CONFIG_TOKEN } from './config';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    // In the event that you don't want to always specify a service that may or may not be injected, you need another approach.  Instead set it up in the service itself to be provided based on when needed called tree-shakable providers.  This is the preferred way to set up a service in Angular. It is provided in the root injector of the application. The provider is responsible for creating an instance of the service and providing it to the component that needs it.
-   /*  providers: [
+    // Use custom config
+    // To make tree-shakeable remove and provide the config in the root module. This will make the config available to all components and services in the application. The config can be provided using an InjectionToken, which is a unique identifier for the config values. The InjectionToken can be used to inject the config values into components and services that need them.
+    /* providers: [
       {
-        provide: CoursesService,
-        useClass: CoursesService
+        provide: CONFIG_TOKEN,
+        useValue: () => APP_CONFIG
       }
     ] */
 })
@@ -21,8 +23,11 @@ export class AppComponent implements OnInit {
   // The dollar sign at the end of the variable name is a convention to indicate that this variable is an observable.
   courses$ : Observable<Course[]>;
 
-  constructor(private coursesService: CoursesService) {
-    console.log('root component constructor' + this.coursesService.id);
+  constructor(
+    private coursesService: CoursesService,
+    @Inject(CONFIG_TOKEN) private config: AppConfig
+  ) {
+    console.log('root component config:', config);
   }
 
   ngOnInit() {
