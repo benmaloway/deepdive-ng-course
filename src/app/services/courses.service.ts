@@ -4,12 +4,13 @@ import { Course } from '../model/course';
 import { Observable } from 'rxjs/internal/Observable';
 
 let counter = 0;
-// This insures we only create one instance of the service for the entire application. This is called a singleton service.
-// It is injected in constructor of the component that needs it. The service is provided in the root injector of the application.
-// Behind the scenes this creates a 'provider' for the service in the root injector of the application. The provider is responsible for creating an instance of the service and providing it to the component that needs it.
-// It's possible to create your own provider for the service in a specific module or component. This is called a 'local provider'. The local provider will create a new instance of the service for that specific module or component. This is useful when you want to have different instances of the service for different parts of the application.
+// Set up as app wide singleton service. This is the preferred way to set up a service in Angular. It is provided in the root injector of the application. The provider is responsible for creating an instance of the service and providing it to the component that needs it.
+// Always use it when it is stateless and not component specific. 
+// If it is stateful and component specific, then provide it in the component itself. This will create a unique instance of the service for that component. It will not be shared with other components. This is called a non-singleton service.  You would use the providedIn property of the @Injectable decorator to specify that the service should be provided in the root injector of the application. This will create a singleton instance of the service that can be shared across the entire application. You would use this approach when you want to share state or data between different components in your application.  You would use the providers property of the @Component decorator to specify that the service should be provided in the component's injector. This will create a unique instance of the service for that component and its children. You would use this approach when you want to encapsulate state or data within a specific component and its children.
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
+  useFactory: (http: HttpClient) => new CoursesService(http),
+  deps: [HttpClient]
 })
 export class CoursesService {
 

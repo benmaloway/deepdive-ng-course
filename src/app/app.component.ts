@@ -7,12 +7,13 @@ import {Course} from './model/course';
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    providers: [
+    // In the event that you don't want to always specify a service that may or may not be injected, you need another approach.  Instead set it up in the service itself to be provided based on when needed called tree-shakable providers.  This is the preferred way to set up a service in Angular. It is provided in the root injector of the application. The provider is responsible for creating an instance of the service and providing it to the component that needs it.
+   /*  providers: [
       {
         provide: CoursesService,
         useClass: CoursesService
       }
-    ]
+    ] */
 })
 
 export class AppComponent implements OnInit {
@@ -25,16 +26,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    //const params = new HttpParams().set('pageNumber', '0').set('pageSize', '3');
-
-    /* this.http.get('/api/courses', { params })
-      .subscribe(
-        courses => {
-          console.log(this.courses);
-          this.courses = courses;
-        }); */
-    // This will be moved to the courses service. The service will be responsible for fetching the data from the server and returning it to the component.
     this.courses$ =  this.coursesService.loadCourses();
   }
 
