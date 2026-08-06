@@ -13,6 +13,7 @@
 
       @for (course of courses; track course) {
         <course-card
+        highlighted
         (courseChanged)="save($event)"
           [course]="course">
         <course-image [src]="course.iconUrl"></course-image>

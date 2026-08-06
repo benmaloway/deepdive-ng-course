@@ -4,16 +4,17 @@
 // className property of the host element (the course-card component) to the cssClasses property of the directive. 
 // The cssClasses property returns the string "highlighted", 
 // which adds the highlighted class to the course-card component when it is selected.
-import { Directive, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, Host, HostBinding, HostListener, Input, Output } from '@angular/core';
+import { CoursesService } from '../services/courses.service';
 
 @Directive({
   selector: '[highlighted]', // Does not need to be same name of the input-attr 'highlighted', but CAN be as with current example.
   exportAs: 'hl'
 })
 export class HighlightedDirective {
-
-  constructor() { 
-    //console.log('HighlightedDirective.constructor()');
+  // @Host decorator ensures that the instance of the CoursesService is injected from the host element (the course-card component) and not from any other ancestor element. This ensures that the directive has access to the same instance of the CoursesService as the course-card component.
+  constructor(@Host() private coursesService: CoursesService) { 
+    console.log('coursesServices highlighted '+this.coursesService.id);
   }
   // This allows passing of an expression directly from the html via the [highlighted] input-attribute, then used in getter below.
   @Input('highlighted')
@@ -45,7 +46,7 @@ export class HighlightedDirective {
 
   @HostListener('mouseover', ['$event'])
   mouseOver($event) {
-    console.log($event)
+    //console.log($event)
     this.isHighlighted = true;
     this.toggleHighlight.emit(this.isHighlighted);
   }

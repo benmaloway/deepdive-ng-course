@@ -14,14 +14,6 @@ import { APP_CONFIG, AppConfig, CONFIG_TOKEN } from './config';
         useClass: CoursesService
       }
     ] 
-    // Use custom config
-    // To make tree-shakeable remove and provide the config in the root module. This will make the config available to all components and services in the application. The config can be provided using an InjectionToken, which is a unique identifier for the config values. The InjectionToken can be used to inject the config values into components and services that need them.
-    /* providers: [
-      {
-        provide: CONFIG_TOKEN,
-        useValue: () => APP_CONFIG
-      }
-    ] */
 })
 
 export class AppComponent implements OnInit {
