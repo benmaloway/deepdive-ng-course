@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Course } from '../model/course';
 import { Observable } from 'rxjs/internal/Observable';
+
+let counter = 0;
 // This insures we only create one instance of the service for the entire application. This is called a singleton service.
 // It is injected in constructor of the component that needs it. The service is provided in the root injector of the application.
 // Behind the scenes this creates a 'provider' for the service in the root injector of the application. The provider is responsible for creating an instance of the service and providing it to the component that needs it.
@@ -11,8 +13,12 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class CoursesService {
 
+  id:number;
+
   constructor(private http: HttpClient) {
-  
+    counter++;
+    this.id = counter;
+    console.log("CoursesService instance created", this.id);
   }
 
   loadCourses() : Observable<Course[]> {
