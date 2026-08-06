@@ -1,5 +1,5 @@
 import { CoursesService } from './services/courses.service';
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, Inject, Optional} from '@angular/core';
 import { Observable } from 'rxjs';
 import {Course} from './model/course';
 import { APP_CONFIG, AppConfig, CONFIG_TOKEN } from './config';
@@ -8,6 +8,12 @@ import { APP_CONFIG, AppConfig, CONFIG_TOKEN } from './config';
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
+     providers: [
+      {
+         provide: CoursesService,
+        useClass: CoursesService
+      }
+    ] 
     // Use custom config
     // To make tree-shakeable remove and provide the config in the root module. This will make the config available to all components and services in the application. The config can be provided using an InjectionToken, which is a unique identifier for the config values. The InjectionToken can be used to inject the config values into components and services that need them.
     /* providers: [
@@ -24,6 +30,8 @@ export class AppComponent implements OnInit {
   courses$ : Observable<Course[]>;
 
   constructor(
+    // Use @Optional() to make the service optional. If the service is not provided, the application will not throw an error. This is useful for services that are not required for the application to function. For example, a logging service that is only used for debugging purposes. If the service is not provided, the application will still function normally.
+    //@Optional() private coursesService: CoursesService,
     private coursesService: CoursesService,
     @Inject(CONFIG_TOKEN) private config: AppConfig
   ) {

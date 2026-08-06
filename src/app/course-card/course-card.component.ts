@@ -4,7 +4,10 @@ import {
   Input,
   OnInit,
   Output,
-  ChangeDetectionStrategy} from '@angular/core';
+  ChangeDetectionStrategy,
+  Optional,
+  Self,
+  SkipSelf} from '@angular/core';
 import {Course} from '../model/course';
 import {CoursesService} from '../services/courses.service';
 
@@ -35,7 +38,15 @@ export class CourseCardComponent implements OnInit {
     @Output('courseChanged')
     courseEmitter = new EventEmitter<Course>();
 
-    constructor(private coursesServices: CoursesService) {
+    constructor(
+      // Use @Optional() to make the service optional. If the service is not provided, the application will not throw an error. This is useful for services that are not required for the application to function. For example, a logging service that is only used for debugging purposes. If the service is not provided, the application will still function normally.
+      //@Optional() private coursesServices: CoursesService
+
+      // This decorator makes sure the service can only come from the component itself
+      // @Self() private coursesServices: CoursesService
+      // This decorator makes sure the service can only come from the parent component. If the service is not provided in the parent component, the application will throw an error. This is useful for services that are required for the application to function. For example, a logging service that is required for the application to function. If the service is not provided in the parent component, the application will throw an error.
+      @SkipSelf() private coursesServices: CoursesService
+    ) {
 
     }
 
