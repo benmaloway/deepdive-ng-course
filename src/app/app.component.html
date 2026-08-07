@@ -13,14 +13,13 @@
 
     <!-- // async pipe subscribes to the observable and returns the latest value it has emitted. When a new value is emitted, the async pipe marks the component to be checked for changes.
     // The async pipe also unsubscribes automatically when the component is destroyed, preventing potential memory leaks. -->
-    <div class="courses">
-      @for (course of courses; track course) {
-        <course-card
+    <div class="courses" *ngIf="(courses$ | async) as courses">
+      <course-card
+        *ngFor="let course of courses"
         (courseChanged)="save($event)"
-          [course]="course">
+        [course]="course">
         <course-image [src]="course.iconUrl"></course-image>
       </course-card>
-    }
 
   </div>
 

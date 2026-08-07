@@ -20,7 +20,6 @@ export class CoursesService {
 
   loadCourses() : Observable<Course[]> {
     const params = new HttpParams().set('pageNumber', '0').set('pageSize', '3');
-
     return this.http.get<Course[]>('/api/courses', { params });
   }
 
