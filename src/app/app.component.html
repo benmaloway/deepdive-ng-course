@@ -4,6 +4,11 @@
     src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
   </div>
 
+  <div class="demo">
+    <!-- if not using onPush, change detection on the child component work -->
+    <button (click)="onEditCourse()">Edit Course</button>
+  </div>
+
   <div>
 
     <!-- // async pipe subscribes to the observable and returns the latest value it has emitted. When a new value is emitted, the async pipe marks the component to be checked for changes.

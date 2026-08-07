@@ -5,9 +5,7 @@ import {
   OnInit,
   Output,
   ChangeDetectionStrategy,
-  Optional,
-  Self,
-  SkipSelf} from '@angular/core';
+} from '@angular/core';
 import {Course} from '../model/course';
 import {CoursesService} from '../services/courses.service';
 
@@ -16,15 +14,9 @@ import {CoursesService} from '../services/courses.service';
     selector: 'course-card',
     templateUrl: './course-card.component.html',
     styleUrls: ['./course-card.component.css'],
-    changeDetection: ChangeDetectionStrategy.Default,
+    // the default change detection mechanism scans the whole component tree for changes, which is usually ok for small applications but can be inefficient for large applications.  The alternative is onPush change detection.
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false,
-    // If you remove this it will not create a unique instance of the service for this component. It will use the instance created in the root injector of the application. This is called a singleton service. The service is provided in the root injector of the application. The provider is responsible for creating an instance of the service and providing it to the component that needs it.
-    providers: [
-      {
-        provide: CoursesService,
-        useClass: CoursesService
-      }
-    ]
 })
 
 export class CourseCardComponent implements OnInit {

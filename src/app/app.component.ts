@@ -34,6 +34,15 @@ export class AppComponent implements OnInit {
     
   }
 
+  onEditCourse() {
+    // With onPush change detection, the child component will not be checked for changes when the parent component is updated. This is because the child component is not aware of the changes made to the parent component. The child component will only be checked for changes when its input properties are updated. In this case, we are updating the course object in the parent component, but we are not updating the input property of the child component. Therefore, the child component will not be checked for changes and will not update its view.
+    // To fix this, we need to create a new object and assign it to the input property of the child component. This will trigger change detection in the child component and update its view.
+    const course = this.courses[0];
+    const newCourse = {...course};
+    newCourse.description = "New Value!";
+    this.courses[0] = newCourse;
+  }
+
   save(course: Course) {
     this.coursesService.saveCourse(course)
     // Will not trigger without subscribing to the observable. The observable will not be executed until it is subscribed to.
