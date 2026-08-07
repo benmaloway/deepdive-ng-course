@@ -6,6 +6,9 @@ import {
   Output,
   ChangeDetectionStrategy,
   Attribute,
+  OnDestroy,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import {Course} from '../model/course';
 import {CoursesService} from '../services/courses.service';
@@ -20,7 +23,7 @@ import {CoursesService} from '../services/courses.service';
     standalone: false,
 })
 
-export class CourseCardComponent implements OnInit {
+export class CourseCardComponent implements OnInit, OnDestroy, OnChanges {
 
     @Input()
     course: Course;
@@ -30,17 +33,27 @@ export class CourseCardComponent implements OnInit {
 
     @Output('courseChanged')
     courseEmitter = new EventEmitter<Course>();
-
+    // constructors should have no logic and is used for dependency injection.
     constructor(
       private coursesServices: CoursesService,
-      // The @Attribute decorator is used to inject the value of an attribute from the host element into the component. In this case, we are injecting the value of the type attribute from the course-card element into the type property of the CourseCardComponent. This allows us to customize the behavior of the component based on the value of the type attribute.  This value would normally not be changed after the component is created, so we can use it to determine how to render the component. For example, we could have different styles for beginner and advanced courses based on the value of the type attribute.
       @Attribute('type') private type: string
     ) {
-
+      // The course data is not yet defined at this point.
+      console.log('constructor', this.course);
     }
 
+    // Your logic needs to go into lifecycle hooks.
     ngOnInit() {
+      console.log('ngOnInit', this.course);
+    }
+    // This is rarely needed as async pipe should automatically deal with cleaning up observable connections.
+    ngOnDestroy() {
+      // unsubscribe from any open connections.
+      console.log('ngOnDestroy');
+    }
 
+    ngOnChanges(changes: SimpleChanges): void {
+      console.log("ngOnChanges", changes);
     }
 
     onTitleChanged(newTitle: string) {

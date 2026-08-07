@@ -10,14 +10,14 @@
 <div class="demo">
   <!-- if not using onPush, change detection on the child component work -->
   <button (click)="onEditCourse()">Edit Course</button>
+  <button (click)="onDeleteCourse()">Delete Course</button>
+  <button (click)="onChangeCourse()">Change Course</button>
 </div>
 
-<!-- // async pipe subscribes to the observable and returns the latest value it has emitted. When a new value is emitted, the async pipe marks the component to be checked for changes.
-// The async pipe also unsubscribes automatically when the component is destroyed, preventing potential memory leaks. -->
-<div class="courses" >
-  <!-- Not putting square brackets around the attribute, you can use the @Attribute decorator to perform one time binding in the component for receiving the attribute value.  This prevents angular from scanning the attribute and saves some performance. -->
+
+<div class="courses" *ngIf="courses[0] as course" >
+
   <course-card
-    *ngFor="let course of courses"
     (courseChanged)="save($event)"
     type="test-attribute"
     [course]="course">

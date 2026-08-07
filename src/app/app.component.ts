@@ -3,12 +3,12 @@ import { CoursesService } from './services/courses.service';
 import {Component, OnInit, Inject, ChangeDetectionStrategy, ChangeDetectorRef, DoCheck} from '@angular/core';
 import {Course} from './model/course';
 import { AppConfig, CONFIG_TOKEN } from './config';
+import { COURSES } from 'src/db-data';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
       {
         provide: CoursesService,
@@ -17,29 +17,15 @@ import { AppConfig, CONFIG_TOKEN } from './config';
     ] 
 })
 
-export class AppComponent implements OnInit, DoCheck {
+export class AppComponent implements OnInit {
 
-  courses: Course[];
-  loaded:boolean = false;
- 
+  courses: Course[] = COURSES;
+
   constructor(
     private coursesService: CoursesService,
-    @Inject(CONFIG_TOKEN) private config: AppConfig,
-    // ChangeDetectorRef is a service that can be injected into a component to allow the component to manually trigger change detection. This is useful when you have a component that is not being checked for changes by Angular's default change detection mechanism, such as when using OnPush change detection strategy. In this case, we are using ChangeDetectorRef to mark the component for check when the courses are loaded from the server.
-    // This is an exceptional situation where the data is being loaded from the server very frequently and we want to update the view when the data is loaded. In most cases, you should not need to use ChangeDetectorRef and should rely on Angular's default change detection mechanism.
-    private cd: ChangeDetectorRef
+    @Inject(CONFIG_TOKEN) private config: AppConfig
   ) {
     
-  }
-// This is a lifecycle hook that is called when the component is checked for changes. This is useful for debugging and understanding when change detection is being triggered. In this case, we are logging a message to the console when the component is checked for changes.
-  ngDoCheck() {
-    console.log("AppComponent checked for changes");
-    // I only got it to work after clicking the edit course button.
-    // NOTE, this only works fires after a subsequent change detection cycle, so it will not fire after the first change detection cycle.  This is because the first change detection cycle is triggered by the component being created and added to the DOM, and the subsequent change detection cycles are triggered by changes to the component's inputs or outputs.  In this case, we are using ChangeDetectorRef to mark the component for check when the courses are loaded from the server, which will trigger a subsequent change detection cycle.
-    if (this.loaded) {
-      this.cd.markForCheck();
-      this.loaded = undefined;
-    }
   }
 
   ngOnInit() {
@@ -47,10 +33,6 @@ export class AppComponent implements OnInit, DoCheck {
     .subscribe(
       courses => {
         this.courses = courses;
-        this.loaded = true;
-        console.log('ngOnit: courses loaded', courses);
-        // Contrary to the instructor's vid, you still need markForCheck here as well as in ngDocheck
-        this.cd.markForCheck();
       },
       err => {
         console.log("Error loading courses", err);
@@ -60,6 +42,24 @@ export class AppComponent implements OnInit, DoCheck {
 
   onEditCourse() {
 
+  }
+
+  onDeleteCourse() {
+
+    // This will trigger ngOnDestroy to remove the card component and unsubscribe from any observables (which shouldn't be needed if using the async pipe).
+    this.courses = [undefined];
+  }
+
+  // This hook only triggered when refreshing a reference to the input object. Just mutating a property of an input object does not register as a change.
+  onChangeCourse() {
+    const course = this.courses[0];
+
+    const newCourse = {
+      ...course,
+      description: 'yo man ngOnChanges'
+    }
+
+    this.courses[0] = newCourse;
   }
 
   save(course: Course) {
