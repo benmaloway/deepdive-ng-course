@@ -1,8 +1,8 @@
 import { CoursesService } from './services/courses.service';
-import {Component, OnInit, Inject, Optional} from '@angular/core';
-import { Observable } from 'rxjs';
+import {Component, OnInit, Inject} from '@angular/core';
 import {Course} from './model/course';
-import { APP_CONFIG, AppConfig, CONFIG_TOKEN } from './config';
+import { AppConfig, CONFIG_TOKEN } from './config';
+import { COURSES } from 'src/db-data';
 
 @Component({
     selector: 'app-root',
@@ -19,7 +19,7 @@ import { APP_CONFIG, AppConfig, CONFIG_TOKEN } from './config';
 export class AppComponent implements OnInit {
 
   // The dollar sign at the end of the variable name is a convention to indicate that this variable is an observable.
-  courses$ : Observable<Course[]>;
+  courses = COURSES;
 
   constructor(
     // Use @Optional() to make the service optional. If the service is not provided, the application will not throw an error. This is useful for services that are not required for the application to function. For example, a logging service that is only used for debugging purposes. If the service is not provided, the application will still function normally.
@@ -27,11 +27,11 @@ export class AppComponent implements OnInit {
     private coursesService: CoursesService,
     @Inject(CONFIG_TOKEN) private config: AppConfig
   ) {
-    console.log('root component config:', config);
+    
   }
 
   ngOnInit() {
-    this.courses$ =  this.coursesService.loadCourses();
+    
   }
 
   save(course: Course) {

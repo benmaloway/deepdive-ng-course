@@ -8,7 +8,8 @@
       ></ng-content>
     }
     <div class="course-description">
-      Edit Title: <input #courseTitle [value]="course.description">
+      <!--the default change detection mechanism scans the whole component tree for changes, which is usually ok for small applications but can be inefficient for large applications.  The alternative is onPush change detection. -->
+      Edit Title: <input #courseTitle [value]="course.description" (keyup)="onTitleChanged(courseTitle.value)">
     </div>
     <div class="course-category">
       @switch (course.category) {
