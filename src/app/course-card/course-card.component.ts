@@ -5,6 +5,7 @@ import {
   OnInit,
   Output,
   ChangeDetectionStrategy,
+  Attribute,
 } from '@angular/core';
 import {Course} from '../model/course';
 import {CoursesService} from '../services/courses.service';
@@ -31,7 +32,9 @@ export class CourseCardComponent implements OnInit {
     courseEmitter = new EventEmitter<Course>();
 
     constructor(
-      private coursesServices: CoursesService
+      private coursesServices: CoursesService,
+      // The @Attribute decorator is used to inject the value of an attribute from the host element into the component. In this case, we are injecting the value of the type attribute from the course-card element into the type property of the CourseCardComponent. This allows us to customize the behavior of the component based on the value of the type attribute.  This value would normally not be changed after the component is created, so we can use it to determine how to render the component. For example, we could have different styles for beginner and advanced courses based on the value of the type attribute.
+      @Attribute('type') private type: string
     ) {
 
     }
