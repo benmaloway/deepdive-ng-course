@@ -36,7 +36,9 @@ export class AppComponent implements OnInit {
   }
 
   onEditCourse() {
-
+    console.log('onEditCourse init this.courses[1].category = ', this.courses[1].category);
+    this.courses[1].category = 'ADVANCED';
+    console.log('onEditCourse CHANGE this.courses[1].category = ', this.courses[1].category);
   }
 
   onDeleteCourse() {
@@ -47,14 +49,14 @@ export class AppComponent implements OnInit {
 
   // This hook only triggered when refreshing a reference to the input object. Just mutating a property of an input object does not register as a change.
   onChangeCourse() {
-    const course = this.courses[0];
+    /* const course = this.courses[0];
 
     const newCourse = {
       ...course,
       description: 'yo man ngOnChanges'
     }
 
-    this.courses[0] = newCourse;
+    this.courses[0] = newCourse; */
   }
 
   save(course: Course) {

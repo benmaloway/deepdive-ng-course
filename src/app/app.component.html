@@ -14,7 +14,17 @@
   <button (click)="onChangeCourse()">Change Course</button>
 </div>
 
+<!--  
+That tracks with everything we found. To recap where things landed:
 
+The pipe is genuinely pure (confirmed in the live bundle: pure: true), and course-card is now default strategy (I commented out OnPush for you).
+With those two facts, a pure pipe recomputing correctly once its input changes will accurately drop courses[1] from a 'BEGINNER'-filtered list the moment its category becomes 'ADVANCED' — that's not a bug, that's the filter doing its job.
+The "broken"/stale case the instructor is likely illustrating is the other combination: pure pipe + a mutation that never gets seen because nothing forces recomputation (which was the original state before your edits) — where the pipe just returns its memoized result and the list silently goes stale, still showing the item as if nothing changed.
+So your current setup happens to demonstrate the pipe working correctly, not the failure mode. If you want to reproduce the instructor's "broken" version to compare side by side, that's back to the original state: OnPush back on course-card, and no reassignment in onEditCourse — just the raw mutation. Let me know if you want that toggled back, or if you're good leaving it as-is.
+
+Pipes are pure by default meaning they minimize angular's use of them as much as possible to reduce overhead.
+An impure pipe is called in EVERY change detection cycle.  
+-->
 <div class="courses" *ngFor="let course of ( courses | filterByCategory: 'BEGINNER') " >
 
   <course-card

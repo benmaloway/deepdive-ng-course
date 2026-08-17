@@ -24,7 +24,7 @@ import {CoursesService} from '../courses.service';
     templateUrl: './course-card.component.html',
     styleUrls: ['./course-card.component.css'],
     // the default change detection mechanism scans the whole component tree for changes, which is usually ok for small applications but can be inefficient for large applications.  The alternative is onPush change detection.
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    // changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false,
 })
 
