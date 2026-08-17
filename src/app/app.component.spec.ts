@@ -1,7 +1,7 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { CourseCardComponent } from './course-card/course-card.component';
-import { CourseImageComponent } from './course-image/course-image.component';
+import { CourseImageComponent } from './courses/course-image/course-image.component';
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({

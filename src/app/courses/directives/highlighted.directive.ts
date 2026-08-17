@@ -5,11 +5,12 @@
 // The cssClasses property returns the string "highlighted", 
 // which adds the highlighted class to the course-card component when it is selected.
 import { Directive, EventEmitter, Host, HostBinding, HostListener, Input, Output } from '@angular/core';
-import { CoursesService } from '../services/courses.service';
+import { CoursesService } from '../courses.service';
 
 @Directive({
   selector: '[highlighted]', // Does not need to be same name of the input-attr 'highlighted', but CAN be as with current example.
-  exportAs: 'hl'
+  exportAs: 'hl',
+  standalone: false
 })
 export class HighlightedDirective {
   // @Host decorator ensures that the instance of the CoursesService is injected from the host element (the course-card component) and not from any other ancestor element. This ensures that the directive has access to the same instance of the CoursesService as the course-card component.

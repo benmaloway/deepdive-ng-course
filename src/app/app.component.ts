@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { CoursesService } from './services/courses.service';
+import { CoursesService } from './courses/courses.service';
 import {Component, OnInit, Inject, ChangeDetectionStrategy, ChangeDetectorRef, DoCheck} from '@angular/core';
 import {Course} from './model/course';
 import { AppConfig, CONFIG_TOKEN } from './config';
@@ -9,12 +9,7 @@ import { COURSES } from 'src/db-data';
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    providers: [
-      {
-        provide: CoursesService,
-        useClass: CoursesService
-      }
-    ] 
+    standalone: false,
 })
 
 export class AppComponent implements OnInit {
