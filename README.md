@@ -9,7 +9,18 @@ This course repository is updated to Angular 22:
 
 # Installation pre-requisites
 
-IMPORTANT: Please use Node 24 LTS (Long Term Support version). 
+IMPORTANT: This branch targets Angular 22, which requires Node 22.22.3+ (or newer supported Node 24/26 release). If your machine has a newer system Node version that is too old for Angular 22, switch to a compatible runtime before running the app.
+
+If you are on Windows and need a quick workaround without changing your global install:
+
+    npx -p node@22 npm start
+
+If you use nvm-windows, the project also includes a .nvmrc file so you can do:
+
+    nvm install 22.23.2
+    nvm use 22.23.2
+    npm install
+    npm start
 
 # Installing the Angular CLI
 

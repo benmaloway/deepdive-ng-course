@@ -11,6 +11,9 @@
     "server": "tsx --tsconfig ./server.tsconfig.json ./server.ts"
   },
   "private": true,
+  "engines": {
+    "node": ">=22.22.3"
+  },
   "dependencies": {
     "@angular/animations": "^22.0.0",
     "@angular/cdk": "^22.0.0",
