@@ -8,10 +8,16 @@
 <div>
 
 <div class="demo">
+
+  <!-- id generated in messages.xlf 5947023292411852232.  If the text never changes, the id never changes.  If you change the text it changes the id. -->
+  <!-- <h4 i18n>Welcome to the Angular Core Deep Dive Course</h4> -->
+   <!-- You can give meaning and context to the translator by using i18n as an attribute.  'meaning|description'.  Changing meaning will change the translation id, but changing description will not.-->
+    <!-- if you want to keep a unique id that never changes you can use @@myIdentifier.  In most cases you don't need all this and just the i18n tag alone. -->
+  <h4 i18n="welcome message|Greet the user at the beginning of the course@@welcomeMessage">Welcome to the Angular Core Deep Dive Course</h4>
   <!-- if not using onPush, change detection on the child component work -->
-  <button (click)="onEditCourse()">Edit Course</button>
-  <button (click)="onDeleteCourse()">Delete Course</button>
-  <button (click)="onChangeCourse()">Change Course</button>
+  <button (click)="onEditCourse()" i18n>Edit Course</button>
+  <!-- <button (click)="onDeleteCourse()">Delete Course</button>
+  <button (click)="onChangeCourse()">Change Course</button> -->
 </div>
 
 <!--  
