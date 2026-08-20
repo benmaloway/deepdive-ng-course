@@ -12,17 +12,33 @@
       Edit Title: <input #courseTitle [value]="course.description" (keyup)="onTitleChanged(courseTitle.value)">
     </div>
     <div class="course-category">
+      <!-- Original ICU select syntax kept for reference: it is brittle in this Angular 22 setup and can trigger runtime errors. -->
+      <div class="category" i18n>
+        {
+          course.category,
+          select,
+          BEGINNER {Beginner}
+          INTERMEDIATE {Intermediate}
+          ADVANCED {Advanced}
+        }
+      </div>
+      <!-- The previous ICU can be brittle.  The following may be the most modern syntax. -->
+      <!-- <div class="category">
       @switch (course.category) {
         @case ('BEGINNER') {
-          <div class="category">Beginner</div>
+          <span i18n>Beginner</span>
         }
         @case ('INTERMEDIATE') {
-          <div class="category">Intermediate</div>
+          <span i18n>Intermediate</span>
         }
         @case ('ADVANCED') {
-          <div class="category">Advanced</div>
+          <span i18n>Advanced</span>
+        }
+        @default {
+          <span>{{ course.category }}</span>
         }
       }
+      </div> -->
     </div>
     <button (click)="onSaveClicked(courseTitle.value)">Save Course</button>
   </div>

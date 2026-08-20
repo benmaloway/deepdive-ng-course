@@ -36,6 +36,20 @@ Note: different branches/sections of this repo pin different Angular versions (t
 
 `npx` resolves the binary from this project's `node_modules/.bin` first, so it uses the exact CLI version installed for the current branch rather than whatever (if anything) is installed globally.
 
+# i18n extraction in Angular 22
+
+This branch is on Angular 22, and the old instructor syntax using `--i18n-locale` is no longer supported by the current CLI.
+
+The working command is:
+
+    npx -p node@22 ng extract-i18n --format xlf --out-file messages.fr.xlf
+
+This generates a file for the French locale without using the removed `--i18n-locale` flag. The plain command without the extra arguments still works:
+
+    npx -p node@22 ng extract-i18n
+
+If you later want to build localized output, use the locale-aware build configuration or a configured `--localize` build rather than trying to pass `--i18n-locale` to `extract-i18n`.
+
 # Node version auto-switching (.nvmrc)
 
 This checkout includes a `.nvmrc` file pinning Node to the version required by this branch's Angular version. If you use [nvm](https://github.com/nvm-sh/nvm), running the following inside the project directory switches you to the right Node version automatically:

@@ -16,6 +16,10 @@ export class AppComponent implements OnInit {
 
   courses: Course[] = COURSES;
 
+  get coursesTotal(): number {
+    return this.courses?.length ?? 0;
+  }
+
   constructor(
     private coursesService: CoursesService,
     @Inject(CONFIG_TOKEN) private config: AppConfig
@@ -28,6 +32,7 @@ export class AppComponent implements OnInit {
     .subscribe(
       courses => {
         this.courses = courses;
+        console.log('this.coursesTotal', this.coursesTotal);
       },
       err => {
         console.log("Error loading courses", err);

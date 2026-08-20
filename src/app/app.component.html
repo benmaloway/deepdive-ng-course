@@ -9,29 +9,26 @@
 
 <div class="demo">
 
-  <!-- id generated in messages.xlf 5947023292411852232.  If the text never changes, the id never changes.  If you change the text it changes the id. -->
-  <!-- <h4 i18n>Welcome to the Angular Core Deep Dive Course</h4> -->
-   <!-- You can give meaning and context to the translator by using i18n as an attribute.  'meaning|description'.  Changing meaning will change the translation id, but changing description will not.-->
-    <!-- if you want to keep a unique id that never changes you can use @@myIdentifier.  In most cases you don't need all this and just the i18n tag alone. -->
-  <h4 i18n="welcome message|Greet the user at the beginning of the course@@welcomeMessage">Welcome to the Angular Core Deep Dive Course</h4>
-  <!-- if not using onPush, change detection on the child component work -->
   <button (click)="onEditCourse()" i18n>Edit Course</button>
-  <!-- <button (click)="onDeleteCourse()">Delete Course</button>
-  <button (click)="onChangeCourse()">Change Course</button> -->
+
+  <!-- Original ICU plural syntax kept for reference: it is brittle in this Angular 22 setup and may disappear at runtime. -->
+  <div i18n>
+    { coursesTotal, plural,
+    =0 {No courses are available.}
+    =1 {One course is available.}
+    other {A total of {{coursesTotal}} courses are available.}
+  }
+  </div>
+  <!-- this would be the non ICU syntax, perhaps more robust -->
+  <!-- div [ngPlural]="coursesTotal">
+    <ng-template ngPluralCase="=0" i18n>No courses are available.</ng-template>
+    <ng-template ngPluralCase="=1" i18n>One course is available.</ng-template>
+    <ng-template ngPluralCase="other" i18n>A total of {{ coursesTotal }} courses are available.</ng-template>
+  </div> -->
+
 </div>
 
-<!--  
-That tracks with everything we found. To recap where things landed:
-
-The pipe is genuinely pure (confirmed in the live bundle: pure: true), and course-card is now default strategy (I commented out OnPush for you).
-With those two facts, a pure pipe recomputing correctly once its input changes will accurately drop courses[1] from a 'BEGINNER'-filtered list the moment its category becomes 'ADVANCED' — that's not a bug, that's the filter doing its job.
-The "broken"/stale case the instructor is likely illustrating is the other combination: pure pipe + a mutation that never gets seen because nothing forces recomputation (which was the original state before your edits) — where the pipe just returns its memoized result and the list silently goes stale, still showing the item as if nothing changed.
-So your current setup happens to demonstrate the pipe working correctly, not the failure mode. If you want to reproduce the instructor's "broken" version to compare side by side, that's back to the original state: OnPush back on course-card, and no reassignment in onEditCourse — just the raw mutation. Let me know if you want that toggled back, or if you're good leaving it as-is.
-
-Pipes are pure by default meaning they minimize angular's use of them as much as possible to reduce overhead.
-An impure pipe is called in EVERY change detection cycle.  
--->
-<div class="courses" *ngFor="let course of ( courses | filterByCategory: 'BEGINNER') " >
+<div class="courses" *ngFor="let course of courses " >
 
   <course-card
     (courseChanged)="save($event)"
